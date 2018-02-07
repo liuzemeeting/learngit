@@ -1,0 +1,14 @@
+setup.py
+myDouban/__init__.py
+myDouban/items.py
+myDouban/middlewares.py
+myDouban/pipelines.py
+myDouban/settings.py
+myDouban/mid/__init__.py
+myDouban/spiders/__init__.py
+myDouban/spiders/douban.py
+project.egg-info/PKG-INFO
+project.egg-info/SOURCES.txt
+project.egg-info/dependency_links.txt
+project.egg-info/entry_points.txt
+project.egg-info/top_level.txt
