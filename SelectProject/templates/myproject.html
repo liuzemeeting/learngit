@@ -1,0 +1,125 @@
+{% extends "personbase.html" %}
+{% load staticfiles %}
+{% block contentLeft %}
+<div class="msg-text-bottom">
+        <div class="gallery-head">
+            <h3>我 的 课 程</h3>
+            <p>好 好 学 习 ，天 天 向 上</p>
+        </div>
+        <ul  style="overflow: hidden;" id="mysource">
+		</ul>
+		<div id="myul" class="text-center"></div>
+    </div>
+{% endblock %}
+{% block script %}
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="../static/js/jquery.twbsPagination.min.js"></script>
+<script>
+	//数据分页
+    var thispage = 1
+    var commName = ""
+    var fenye = $('#myul')
+    var defaultOptions = ""
+	function addFenyehtml(yeNumber){
+        console.log("老子要分页了............");
+        if (defaultOptions!=""){
+            var currentPage=fenye.twbsPagination('getCurrentPage');
+            if(currentPage > yeNumber){
+                currentPage=1;
+            }
+            var currentOptioins={
+                totalPages:yeNumber,
+                first:"首页",
+                last:"尾页",
+                prev:"上一页",
+                next:"下一页",
+                startPage:currentPage,
+                visiblePages:yeNumber>5?5:yeNumber,
+                version:'1:1',
+                initiateStartPageClick:false,
+                onPageClick:function(event,page){
+                    console.log("page",page)
+                    thispage=page;
+                    loaddata(page);
+                }
+            }
+            fenye.twbsPagination('destroy');
+            fenye.twbsPagination($.extend({},defaultOptions,currentOptioins));
+            defaultOptions=currentOptioins;
+        }
+        else{
+            var page=1;
+            defaultOptions={
+                totalPages:yeNumber,
+                first:"首页",
+                last:"尾页",
+                prev:"上一页",
+                next:"下一页",
+                startPage:1,
+                visiblePages:yeNumber>5?5:yeNumber,
+                version:'1.1',
+                initiateStartPageClick:false,
+                onPageClick:function(event,page){
+                    thispage=page
+                    localdata();
+                }
+            }
+            fenye.twbsPagination(defaultOptions);
+        }
+    }
+
+    var data = JSON.parse(localStorage.getItem("data"));
+	console.log(data)
+    function localdata(){
+        var objdata=data;
+        var url="http://localhost:8080/myprojectApi/";
+        console.log(objdata)
+				ajaxFn(url, objdata, function(data) {
+					console.log(data)
+					data=$.parseJSON(data)//将字符串转成JSON数据
+					// console.log(typeof data)
+					mydata=data.data;
+					dataParse(mydata);
+					bbb=(data.data).length/6;
+                    yeNumber=Math.ceil(bbb)
+					console.log("这是页码数")
+					console.log(yeNumber)
+                    addFenyehtml(yeNumber)
+					
+					// console.log(mydata);
+				})
+
+    }
+	function dataParse(mydata){
+		$("#mysource").empty()
+		for(i=0;i<mydata.length;i++){
+			if(i >= (thispage - 1) * 6 && i <= thispage * 6 - 1) {
+				var projectid=mydata[i]["projectid"];
+				var projectname=mydata[i]["projectname"];
+				var proteacher=mydata[i]["proteacher"];
+				var propicture=mydata[i]["propicture"];
+				var prodetail=mydata[i]["prodetail"];
+				imageName = "http://localhost:8080/static/myfile/" + propicture;
+				var ele='<li class="list-block"><div class="list_li"><i class="del_icon"></i><i class="delred_icon"></i><div class="good-detail"><a href="" target="_blank"><img src="'+imageName+'" alt="" style="width:210px;height:210px"></a></div><p class="f16 font_dot" >'+ projectname +'</p><p class="price" >'+ proteacher +'</p></div></li>'
+				$("#mysource").append(ele);
+			}
+			}
+			
+		}
+    function ajaxFn(urlString, postdata, fn) {
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					result = xmlhttp.responseText;
+					// console.log(result)
+					fn(result);
+				}
+			}
+			xmlhttp.open("POST", urlString, true);
+			xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+			xmlhttp.send("data=" + postdata);
+		}
+	localdata()
+    
+</script>
+{% endblock %}

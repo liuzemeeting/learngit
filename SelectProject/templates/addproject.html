@@ -1,0 +1,199 @@
+{% extends "personbase.html" %}
+{% load staticfiles %}
+{% block contentLeft %}
+<div class="container-fluid">
+    <div class="row" >
+		<div class="col-md-4 col-md-offset-3">
+			<div><input type="text" class="form-control" id="goodsSelectName" placeholder="用户名"></div>
+		</div>
+		<div>
+			<button type="submit" class="btn btn-success" id="goodsSelectBtn"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>课程查询</button>
+		</div>
+    </div>
+
+    <div style="margin-top:15px">
+        <table  class="table table-bordered">
+            <tr class="active">
+                <!-- <td class="info nature"><input type="checkbox" id = "checkbox-all"></td> -->
+                <td class="active">序号</td>
+                <td class="active">课程编号</td>
+                <td class="active">课程名称</td>
+                <td class="active">课程图片</td>
+                <td class="active">课程老师</td>
+                <td class="active">截止时间</td>
+                <td class="active">编辑</td>
+            </tr>
+            <tbody id="userTable">
+                
+            </tbody>
+        </table>
+        <div id="myul" class="text-center"></div>
+    </div>
+    
+    
+</div>
+<!-- 弹出框 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    添加活动
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="myform" action="" enctype="multipart/form-data" method="post">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">标题:</label>
+                        <input type="text" class="form-control" id="users" name="active_name">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">活动开始日期:</label>
+                        <input  class="form-control only" type="datetime" name="starttime" id="projectnames" onClick="WdatePicker({el:'prostart',dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate: '#F{$dp.$D(\'proend\')}' })">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">活动结束日期:</label>
+                        <input  class="form-control only" type="datetime" id="proend" name="stoptime" onClick="WdatePicker({el:'proend',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate: '#F{$dp.$D(\'prostart\')}' })">
+                    </div>
+                    <div class="form-group">
+                        <label for="">位置:</label>
+                        <input type="text" class="form-control" name="active_position" id="location">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">活动详情:</label>
+                        <textarea class="form-control" rows="6" style="resize: none;" name="activedetail"></textarea>  
+                    </div>
+                </form>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" id="submitBtn" data-dismiss="modal" onclick="ajaxSubmitForm()">
+                    提交
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+{% endblock %}
+{% block script %}
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<!-- <script src="../static/js/jquery.form.min.js"></script> -->
+<script src="../static/js/jquery.twbsPagination.min.js"></script>
+<script>
+    //数据分页
+    var data = JSON.parse(localStorage.getItem("logMsg"));
+	console.log(data)
+    document.getElementById("users").value=data;//通过ID给文本框赋值
+    var thispage = 1
+    var commName = ""
+    var fenye = $('#myul')
+    var defaultOptions = ""
+    function addFenyehtml(yeNumber){
+        console.log("老子要分页了............");
+        if (defaultOptions!=""){
+            var currentPage=fenye.twbsPagination('getCurrentPage');
+            if(currentPage > yeNumber){
+                currentPage=1;
+            }
+            console.log("*********************")
+            var currentOptioins={
+                totalPages:yeNumber,
+                first:"首页",
+                last:"尾页",
+                prev:"上一页",
+                next:"下一页",
+                startPage:currentPage,
+                visiblePages:yeNumber>5?5:yeNumber,
+                version:'1:1',
+                initiateStartPageClick:false,
+                onPageClick:function(event,page){
+                    console.log("page",page)
+                    thispage=page;
+                    loaddata(page);
+                }
+            }
+            fenye.twbsPagination('destroy');
+            fenye.twbsPagination($.extend({},defaultOptions,currentOptioins));
+            defaultOptions=currentOptioins;
+        }
+        else{
+            console.log("555555555555555555555555555")
+            var page=1;
+            defaultOptions={
+                totalPages:yeNumber,
+                first:"首页",
+                last:"尾页",
+                prev:"上一页",
+                next:"下一页",
+                startPage:1,
+                visiblePages:yeNumber>5?5:yeNumber,
+                version:'1.1',
+                initiateStartPageClick:false,
+                onPageClick:function(event,page){
+                    thispage=page
+                    loaddata();
+                }
+            }
+            fenye.twbsPagination(defaultOptions);
+        }
+    }
+    //本地数据加载
+    function loaddata(){
+        var url='http://localhost:8080/addprojectApi/'
+        $.ajax({
+            url:url,
+            success:function(data){
+                console.log(data)
+                bbb=(data.data).length/8;
+                yeNumber=Math.ceil(bbb)
+                console.log(yeNumber)
+                mydata=data.data;
+                dataprase(mydata);
+                addFenyehtml(yeNumber)
+            }
+        })
+
+    }
+    var imageName=""
+    function dataprase(mydata){
+        console.log(mydata)
+        $("#userTable").children("tr").remove()
+        for(i=0;i<mydata.length;i++){
+            if(i >= (thispage - 1) * 8 && i <= thispage * 8 - 1) {
+                var projectid=mydata[i]["projectid"];
+                var projectname=mydata[i]["projectname"];
+                var proteacher = mydata[i]["proteacher"]
+                var charpertitle=mydata[i]["charpertitle"]
+                var propicture=mydata[i]["propicture"];
+                imageName = "http://localhost:8080/static/myfile/" + propicture;
+                var ele='<tr class="mytr"><td class="active">1</td><td class="active" id="projectid">'+ projectid +'</td><td id="projectname" class="active">'+ projectname +'</td><td class="active"><img style="width:85px;" src="' + imageName + '" /></td><td class="active" id="proteacher">'+ proteacher +'</td><td class="active" id="charpertitle">'+ charpertitle +'</td><td class="active"><button type="button" class="btn btn-primary addBtn" data-toggle="modal" data-target="#myModal" style="margin:5px;"><span id="" class="glyphicon glyphicon-plus"></span>添加</button></td></tr>'
+                $("#userTable").append(ele)
+            }
+           
+        }
+        addEvent();
+    }
+    loaddata();
+    // $(".mytr").delegate('button','click',function(){
+    //     a = $(this).html();
+	// 	var that = $(this).parents(".row");
+    //     var projectid=that.children("#projectid").html();
+    //     var projectname=that.children("#projectname").html();
+    //     var proteacher=that.children("#proteacher").html();
+    //     var charpertitle=that.children("#charpertitle").html();
+    //     console.log(projectid,projectname)
+    // })
+    function addEvent(){
+         $(".glyphicon-plus").click(function(){
+        console.log("55555555555555555555555555555")
+        })
+    }
+   
+
+</script>
+{% endblock %}

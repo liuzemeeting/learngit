@@ -1,0 +1,57 @@
+{% extends "personbase.html" %}
+{% load staticfiles %}
+{% block contentLeft %}
+<div class="gallery-head">
+    <h5>信 息 修 改</h5>
+    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born.</p>
+</div>
+<!-- mail -->
+<div class="mail">
+    <div class="mail-grid1">
+        <form action="http://localhost:8080/updateApi/" method="post" id="updateForm">
+                <input type="hidden" class="form-control" name="userid" id="user" placeholder="请输入密码">
+            <div class="form-group">
+                <label for="exampleInputPassword1">请输入密码</label>
+                <input type="password" class="form-control" name="password" id="" placeholder="请输入密码">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">确认输入</label>
+                <input type="password" class="form-control" id="" placeholder="请确认密码">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">请输入电话号码</label>
+                <input type="text" class="form-control" name="phone" id="" placeholder="电话号码">
+            </div>
+            <!-- <textarea placeholder="Type Your Text Here...." required=" "></textarea> -->
+            <input type="submit" value="确认修改">
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script src="../static/js/jquery.form.min.js"></script>
+<script src="../static/layer/layer.js"></script>
+<script>
+    var data = JSON.parse(localStorage.getItem("logMsg"));
+	console.log(data)
+    document.getElementById("user").value=data;//通过ID给文本框赋值
+    $("#updateForm").on('submit',function(e){
+        e.preventDefault();
+        $(this).ajaxSubmit({
+            success:function(result){
+                aa=result.status;
+				console.log(aa);
+                if(aa=="ok"){
+                    layer.msg("信息修改成功")
+                    location.reload()       
+                }
+                else{
+                    layer.msg("信息修改失败")
+                    location.reload()
+                }
+                  
+            }
+        })
+    })
+</script>
+{% endblock %}

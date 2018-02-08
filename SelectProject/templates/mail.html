@@ -1,0 +1,52 @@
+{% extends "personbase.html" %}
+{% load staticfiles %}
+{% block contentLeft %}
+<div class="gallery-head">
+    <h5>Mail Us</h5>
+    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born.</p>
+</div>
+<!-- mail -->
+<div class="mail">
+    <div class="mail-grid1">
+        <h3>Contact <span>Info</span></h3>
+        <p>Voluptatem accusantium doloremque laudantium.</p>
+        <ul>
+            <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>Phone<span>+8 (213) 746 820 82</span></li>
+            <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i>Email
+                <a href="mailto:info@example.com">info@example.com</a>
+            </li>
+        </ul>
+        <ul>
+            <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>Address<span>PO Box 7784 Diamonds street, Los Angeles, California, US.</span></li>
+        </ul>
+    </div>
+    <div class="mail-grid1">
+        <h3>Send a <span>Message</span></h3>
+        <p>Voluptatem accusantium doloremque laudantium.</p>
+        <form action="http://localhost:8080/mailApi/" id="adviceForm"  method="post">
+            <input type="text" placeholder="姓 名" name="name" >
+            <input type="text" placeholder="联 系 方 式" name="phonenumber" style="width:350px" >
+            <div class="clearfix"> </div>
+            <!-- <input type="text" placeholder="Subject" required=" "> -->
+            <textarea placeholder="请 留 下 你 宝 贵 的 意 见 或 建 议 ...." name="advice" required=" "></textarea>
+            <input type="submit" value="提交">
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script src="../static/js/jquery.form.min.js"></script>
+<script src="../static/layer/layer.js"></script>
+<script>
+    $("#adviceForm").on("submit",function(e){
+        console.log("5555555555555555555555555555")
+        layer.msg("5555555555555555555") 
+			e.preventDefault();
+			$(this).ajaxSubmit({
+				success:function(result){
+					location.reload()
+				}
+			})
+		})
+</script>
+{% endblock %}

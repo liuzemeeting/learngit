@@ -1,0 +1,462 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<title>Python在线教育</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"/>
+		<link href="../static/css/style.css" rel="stylesheet" type="text/css" media="all" />
+		<script src="../static/js/bootstrap.min.js"></script>
+		<script src="../static/js/jquery.form.min.js"></script>
+		<script type="text/javascript" src="../static/js/menu.js"></script>
+		<!-- start top_js_button -->
+		<script type="text/javascript" src="../static/js/move-top.js"></script>
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event) {
+					event.preventDefault();
+					$('html,body').animate({
+						scrollTop: $(this.hash).offset().top
+					}, 1200);
+				});
+			});
+		</script>
+		<!---strat-slider---->
+		<link rel="stylesheet" type="text/css" href="../static/css/slider.css" />
+		<script type="text/javascript" src="../static/js/modernizr.custom.28468.js"></script>
+		<script type="text/javascript" src="../static/js/jquery.cslider.js"></script>
+		<script type="text/javascript">
+			$(function() {
+
+				$('#da-slider').cslider({
+					autoplay: true,
+					bgincrement: 450
+				});
+
+			});
+		</script>
+		<!---//strat-slider---->
+
+	</head>
+
+	<body>
+		<!-- start header -->
+		<div class="header_bg">
+			<div class="wrap">
+				<div id="content">
+					<header id="topnav">
+						<nav>
+							<ul>
+								<li class="active">
+									<a href="#home" class="scroll">主 页 </a>
+								</li>
+								<li>
+									<a href="#ourteam" class="scroll">我们的团队</a>
+								</li>
+								<li>
+									<a href="#portfolio" class="scroll">我们的资源 </a>
+								</li>
+								<li>
+									<a href="#contact" class="scroll">欢迎登陆 </a>
+								</li>
+								<div class="clear"> </div>
+							</ul>
+						</nav>
+						<h1><a href="index.html">Python在线教育</a></h1>
+						<a href="#" id="navbtn">Nav Menu</a>
+						<div class="clear"> </div>
+					</header>
+					<!-- @end #topnav -->
+				</div>
+			</div>
+		</div>
+		
+		<!-- start slider -->
+		<div class="slider_bg" id="home">
+			<div class="wrap">
+				<div class="slider">
+					<div id="da-slider" class="da-slider">
+						<div class="da-slide">
+							<h2><h2>欢 迎 来 到 Python 教 育 课 堂</h2></h2>
+							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+							<button type="button" class="da-link" data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-plus "></span>点击注册</button>
+						</div>
+						<div class="da-slide">
+							<h2><h2>欢 迎 来 到 Python 教 育 课 堂</h2></h2>
+							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+							<button type="button" class="da-link" data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-plus "></span>点击注册</button>
+						</div>
+						<div class="da-slide">
+							<h2><h2>欢 迎 来 到 Python 教 育 课 堂</h2></h2>
+							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+							<button type="button" class="da-link" data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-plus"></span>点击注册</button>
+						</div>
+						<div class="da-slide">
+							<h2><h2>欢 迎 来 到 Python 教 育 课 堂</h2></h2>
+							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+							<button type="button" class="da-link" data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-plus "></span>点击注册</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+				                    &times;
+				                </button>
+						<h4 class="modal-title" id="myModalLabel">
+				                                用户注册
+				        </h4>
+					</div>
+					<div class="modal-body">
+						<form id="registerForm" action="http://localhost:8080/registerApi/"  method="post">
+							<div>
+								<div class="form-group">
+									<label for="recipient-name" class="control-label">添加账号:</label>
+									<input type="text" class="form-control" name="username">
+								</div>
+							</div>
+							<div>
+								<div class="form-group">
+									<label for="recipient-name" class="control-label">添加密码:</label>
+									<input type="text" class="form-control" name="pwd">
+								</div>
+							</div>
+							<div class="modal-footer">
+								<!-- <button type="button" class="btn btn-default" data-dismiss="modal" >关闭 </button> -->
+								<!--<button type="button" class="btn btn-primary" id="submitBtn" onclick="ajaxSubmitForm()">
+														 提交
+													</button>-->
+							    <input type="submit" class="btn btn-primary" value="提交">
+								<!-- <button type="submit" class="btn btn-default">提交</button> -->
+								<!-- <input type="submit" class="btn btn-primary" id="" value="提交" name="" /> -->
+							</div>
+						</form>
+		
+					</div>
+					
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-------start-our team-------->
+		<div class="our_team" id="ourteam">
+			<div class="wrap">
+				<h3 class="heading">专 业  教 育 团 体</h3>
+				<p class="desc">因 为 我 们 专 业，所 以 你 们 成 功</p>
+				<div class="main content_top">
+					<!-- start span_of_3 -->
+					<div class="span_of_3">
+						<div class="span1_of_3">
+							<div>
+								<a href="#"><img src="../static/image/2018012612513583.jpg" alt="" /></a>
+								<div class="span1_of_3_text">
+									<h3><a href="#">Lorem Ipsum is Simply.</a></h3>
+									<h6>UI/UX expertise</h6>
+									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+								</div>
+							</div>
+						</div>
+						<div class="span1_of_3">
+							<div>
+								<a href="#"><img src="../static/image/2018012612574321.jpg" alt="" /></a>
+								<div class="span1_of_3_text">
+									<h3><a  href="#">Lorem Ipsum is Simply.</a></h3>
+									<h6>Sales Manager</h6>
+									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+								</div>
+							</div>
+						</div>
+						<div class="span1_of_3">
+							<div>
+								<a href="#"><img src="../static/image/2018012619044871.jpg" alt="" /></a>
+								<div class="span1_of_3_text">
+									<h3><a  href="#">Lorem Ipsum is Simply.</a></h3>
+									<h6>Art Director</h6>
+									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+								</div>
+							</div>
+						</div>
+						<div class="span1_of_3">
+							<div>
+								<a href="#"><img src="../static/image/2018012619105150.jpg" alt="" /></a>
+								<div class="span1_of_3_text">
+									<h3><a href="#">Lorem Ipsum is Simply.</a></h3>
+									<h6>Senior Planer</h6>
+									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="clear"> </div>
+					</div>
+
+					<!-- end grids_of_3 -->
+				</div>
+			</div>
+			<div class="copyrights">Collect from
+				<a href="###">免费网站模板</a>
+			</div>
+		</div>
+		</div>
+		<!-------end-our team-------->
+		<!--------portfolio----------->
+		<!--start gallery-->
+		<script type="text/javascript" src="../static/js/jquery.mixitup.min.js"></script>
+		<script src="../static/js/jquery.magnific-popup.js" type="text/javascript"></script>
+		<script>
+			$(document).ready(function() {
+				$('.popup-with-zoom-anim').magnificPopup({
+					type: 'inline',
+					fixedContentPos: false,
+					fixedBgPos: true,
+					overflowY: 'auto',
+					closeBtnInside: true,
+					preloader: false,
+					midClick: true,
+					removalDelay: 300,
+					mainClass: 'my-mfp-zoom-in'
+				});
+			});
+		</script>
+		<!--end home-page-con-->
+		<div class="latest_wroks" id="portfolio">
+			<div class="wrap">
+				<h3 class="heading">优 质 学 习 资 源</h3>
+				<p class="desc">最 优 秀 资 源，成 就 最 优 秀 人 才</p>
+				<div class="main_btm">
+					<!--start-mfp -->
+					<div id="small-dialog1" class="mfp-hide">
+						<div class="pop_up">
+							<h2>Lorem Ipsum is simply</h2>
+							<img src="../static/image/2018012619110391.jpg">
+							<p class="para">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+							<p class="para1">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+						</div>
+					</div>
+					<!--end-mfp -->
+					<!--start-content-->
+					<div class="gallery">
+						<div class="container">
+							<div id="gallerylist">
+								<div class="gallerylist-wrapper">
+									<a class="popup-with-zoom-anim" href="#small-dialog1">
+										<img src="../static/image/2018012619114848.jpg" alt="Image 1" />
+										<div class="desc">
+											<h2>Lorem Ipsum is simply</h2>
+											<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+										</div>
+									</a>
+								</div>
+								<div class="gallerylist-wrapper">
+									<a class="popup-with-zoom-anim" href="#small-dialog1">
+										<img src="../static/image/2018012619114848.jpg" alt="Image 1" />
+										<div class="desc">
+											<h2>Lorem Ipsum is simply</h2>
+											<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+										</div>
+									</a>
+								</div>
+								<div class="gallerylist-wrapper">
+									<a class="popup-with-zoom-anim" href="#small-dialog1">
+										<img src="../static/image/2018012619113332.jpg" alt="Image 1" />
+										<div class="desc">
+											<h2>Lorem Ipsum is simply</h2>
+											<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div id="gallerylist1">
+								<div class="gallerylist-wrapper">
+									<a class="popup-with-zoom-anim" href="#small-dialog1">
+										<img src="../static/image/201801261912197.jpg" alt="Image 1" />
+										<div class="desc">
+											<h2>Lorem Ipsum is simply</h2>
+											<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+										</div>
+									</a>
+								</div>
+								<div class="gallerylist-wrapper">
+									<a class="popup-with-zoom-anim" href="#small-dialog1">
+										<img src="../static/image/2018012619114848.jpg" alt="Image 1" />
+
+										<div class="desc">
+											<h2>Lorem Ipsum is simply</h2>
+											<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+										</div>
+									</a>
+								</div>
+								<div class="gallerylist-wrapper">
+									<a class="popup-with-zoom-anim" href="#small-dialog1">
+										<img src="../static/image/2018012619114848.jpg" alt="Image 1" />
+										<div class="desc">
+											<h2>Lorem Ipsum is simply</h2>
+											<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+										</div>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- container -->
+					<!-- <script type="text/javascript" src="../static/js/fliplightbox.min.js"></script> -->
+					<!-- <script type="text/javascript">
+						$('body').flipLightBox()
+					</script> -->
+					<div class="clear"> </div>
+				</div>
+			</div>
+		</div>
+		<!--End-gallery-->
+		<!--------end-portfolio----------->
+		<!---------contacts-------------->
+		<div class="contact" id="contact">
+			<h3 class="heading">开 启 你 的 学 习 之 旅</h3>
+			<p class="desc">Sed ut perspiciatis unde omnis iste natus error sit.</p>
+			<div class="contact-form">
+				<div class="wrap">
+					<div class="content">
+						<h2 class="heading1">学 习 吧 ， 少 年 ！</h2>
+					</div>
+					<center></center>
+					<form action="http://localhost:8080/loginApi/" id="loginForm" method="post">
+						<div class="form-group" >
+							<label for="exampleInputEmail1">请输入你的账号</label>
+							<input type="text" class="form-control" style="width:100%" id="username" name="username" id="exampleInputEmail1" placeholder="请输入你的账号">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">请输入你的密码</label>
+							<input type="password" class="form-control" id="exampleInputPassword1" name="pwd" placeholder="请输入你的密码">
+						</div>
+						<div class="checkbox">
+							<label>
+					            <input type="checkbox"> 记住密码
+					        </label>
+						</div>
+						<center><button type="submit" class="btn btn-default">登录</button></center>
+						
+					</form>
+				</div>
+				<div class="clear"> </div>
+			</div>
+		</div>
+		</div>
+		<div class="footer">
+			<div class="footer_top">
+				<div class="wrap">
+					<div class="social-icons">
+						<ul>
+							<li>
+								<a href="#" target="_blank"></a>
+							</li>
+							<li>
+								<a href="#" target="_blank"></a>
+							</li>
+							<li>
+								<a href="#" target="_blank"></a>
+							</li>
+							<li>
+								<a href="#" target="_blank"></a>
+							</li>
+							<li>
+								<a href="#" target="_blank"></a>
+							</li>
+							<div class="clear"> </div>
+						</ul>
+					</div>
+					<div class="footer_nav">
+						<ul>
+							<li class="active">
+								<a href="#home" class="scroll">主页</a>
+							</li>
+							<li>
+								<a href="#ourteam" class="scroll">我们的团队</a>
+							</li>
+							<li>
+								<a href="#portfolio" class="scroll">我们的资源</a>
+							</li>
+							<li>
+								<a href="#contact" class="scroll">欢迎登录</a>
+							</li>
+							<div class="clear"> </div>
+						</ul>
+					</div>
+					<div class="clear"> </div>
+				</div>
+
+				<script type="text/javascript">
+					$(document).ready(function() {
+
+						var defaults = {
+							containerID: 'toTop', // fading element id
+							containerHoverID: 'toTopHover', // fading element hover id
+							scrollSpeed: 1200,
+							easingType: 'linear'
+						};
+
+						$().UItoTop({
+							easingType: 'easeOutQuart'
+						});
+
+					});
+				</script>
+				<a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
+				<!--end scroll_top_btn -->
+			</div>
+			<p class="copy_right">Copyright &copy; 2018.Company name All rights reserved.More Templates
+				<a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from
+				<a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+			</p>
+	</body>
+	<script src="../static/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$('#loginForm').on('submit', function(e) {
+			var aa="";
+			e.preventDefault(); 
+			$(this).ajaxSubmit({
+				success: function (result) {
+					aa=result.status;
+					console.log(aa);
+					if(aa != "ok"){
+						layer.msg("账号或密码输入错误请重新输入!");
+						console.log("66666666666666666666666666")
+						location.reload()
+					}
+					else{
+						layer.msg("恭喜你登录成功！")
+						console.log("3333333333333333333333333")
+						
+						var user=document.getElementById("username").value;
+						console.log(user)
+						localStorage.setItem("logMsg" ,JSON.stringify(user));
+						console.log(JSON.stringify(user))
+					    localStorage.setItem("keySss" , "ok")
+						setTimeout(function(){
+						    window.location.href="http://localhost:8080/mymain/";
+					    },300)
+						
+					}
+				}
+			})
+		});
+		$("#registerForm").on("submit",function(e){
+			e.preventDefault();
+			$(this).ajaxSubmit({
+				success:function(result){
+					location.reload()
+				}
+			})
+		})
+	</script>
+
+</html>

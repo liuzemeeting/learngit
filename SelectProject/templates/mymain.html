@@ -1,0 +1,109 @@
+{% extends "personbase.html" %}
+{% load staticfiles %}
+{% block contentLeft %}
+<div class="msg-text-bottom">
+        <div class="gallery-head">
+            <h3>推 荐 课 程</h3>
+            <p>因 为 喜 欢 ， 所 以 专 业</p>
+        </div>
+        <ul  style="overflow: hidden;" id="mysource">
+		</ul>
+		<div id="myul" class="text-center"></div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+	//数据分页
+    var thispage = 1
+    var commName = ""
+	var yeNumber=0
+    var fenye = $('#myul')
+    var defaultOptions = ""
+    function addFenyehtml(yeNumber){
+        console.log("老子要分页了............");
+        if (defaultOptions!=""){
+            var currentPage=fenye.twbsPagination('getCurrentPage');
+            if(currentPage > yeNumber){
+                currentPage=1;
+            }
+            console.log("*********************")
+            var currentOptioins={
+                totalPages:yeNumber,
+                first:"首页",
+                last:"尾页",
+                prev:"上一页",
+                next:"下一页",
+                startPage:currentPage,
+                visiblePages:yeNumber>5?5:yeNumber,
+                version:'1:1',
+                initiateStartPageClick:false,
+                onPageClick:function(event,page){
+                    console.log("page",page)
+                    thispage=page;
+                    loaddata(page);
+                }
+            }
+            fenye.twbsPagination('destroy');
+            fenye.twbsPagination($.extend({},defaultOptions,currentOptioins));
+            defaultOptions=currentOptioins;
+        }
+        else{
+            console.log("555555555555555555555555555")
+            var page=1;
+            defaultOptions={
+                totalPages:yeNumber,
+                first:"首页",
+                last:"尾页",
+                prev:"上一页",
+                next:"下一页",
+                startPage:1,
+                visiblePages:yeNumber>5?5:yeNumber,
+                version:'1.1',
+                initiateStartPageClick:false,
+                onPageClick:function(event,page){
+                    thispage=page
+                    loaddata();
+                }
+            }
+            fenye.twbsPagination(defaultOptions);
+        }
+    }
+	function loaddata(){
+		var url="http://localhost:8080/mainshowApi/";
+		console.log(url);
+		$.ajax({
+			url:url,
+			success:function(data){
+				// console.log(data)
+				mydata=data.data;
+				dataparse(mydata);
+				bbb=(data.data).length/8;
+                yeNumber=Math.ceil(bbb)
+                addFenyehtml(yeNumber)
+			}
+		})
+	}
+	function dataparse(mydata){
+        $("#mysource").empty()
+		for(i=0;i<mydata.length;i++){
+			if(i >= (thispage - 1) * 3 && i <= thispage * 3 - 1) {
+				var projectid=mydata[i]["projectid"];
+				var projectname=mydata[i]["projectname"];
+				var proteacher=mydata[i]["proteacher"];
+				var propicture=mydata[i]["propicture"];
+				var prodetail=mydata[i]["prodetail"];
+				imageName = "http://localhost:8080/static/myfile/" + propicture;
+				console.log(imageName)
+				var ele='<li class="list-block"><div class="list_li"><i class="del_icon"></i><i class="delred_icon"></i><div class="good-detail"><a href="" target="_blank"><img src="'+imageName+'" alt="" style="width:210px;height:210px"></a></div><p class="f16 font_dot" >'+ projectname +'</p><p class="price" >'+ proteacher +'</p></div></li>'
+				imageName=""
+				$("#mysource").append(ele);
+				console.log(projectid,projectname,proteacher,imageName)
+
+			}
+			
+		}
+	}
+	loaddata();
+	
+</script>
+{% endblock %}
